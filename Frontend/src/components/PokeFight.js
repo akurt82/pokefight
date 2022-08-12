@@ -1,0 +1,1008 @@
+import React from "react";
+import { useState } from "react";
+import Player from "./player.js";
+import Fetcher from "./fetch.js";
+
+function Test({ pokemons, isLoading }, props) {
+
+  const pokename = [
+    `Bulbasaur`, 
+    `Ivysaur`, 
+    `Venusaur`, 
+    `Charmander`, 
+    `Charmeleon`, 
+    `Charizard`, 
+    `Squirtle`, 
+    `Wartortle`, 
+    `Blastoise`, 
+    `Caterpie`, 
+    `Metapod`, 
+    `Butterfree`, 
+    `Weedle`, 
+    `Kakuna`, 
+    `Beedrill`, 
+    `Pidgey`, 
+    `Pidgeotto`, 
+    `Pidgeot`, 
+    `Rattata`, 
+    `Raticate`, 
+    `Spearow`, 
+    `Fearow`, 
+    `Ekans`, 
+    `Arbok`, 
+    `Pikachu`, 
+    `Raichu`, 
+    `Sandshrew`, 
+    `Sandslash`, 
+    `Nidoran♀`, 
+    `Nidorina`, 
+    `Nidoqueen`, 
+    `Nidoran♂`, 
+    `Nidorino`, 
+    `Nidoking`, 
+    `Clefairy`, 
+    `Clefable`, 
+    `Vulpix`, 
+    `Ninetales`, 
+    `Jigglypuff`, 
+    `Wigglytuff`, 
+    `Zubat`, 
+    `Golbat`, 
+    `Oddish`, 
+    `Gloom`, 
+    `Vileplume`, 
+    `Paras`, 
+    `Parasect`, 
+    `Venonat`, 
+    `Venomoth`, 
+    `Diglett`, 
+    `Dugtrio`, 
+    `Meowth`, 
+    `Persian`, 
+    `Psyduck`, 
+    `Golduck`, 
+    `Mankey`, 
+    `Primeape`, 
+    `Growlithe`, 
+    `Arcanine`, 
+    `Poliwag`, 
+    `Poliwhirl`, 
+    `Poliwrath`, 
+    `Abra`, 
+    `Kadabra`, 
+    `Alakazam`, 
+    `Machop`, 
+    `Machoke`, 
+    `Machamp`, 
+    `Bellsprout`, 
+    `Weepinbell`, 
+    `Victreebel`, 
+    `Tentacool`, 
+    `Tentacruel`, 
+    `Geodude`, 
+    `Graveler`, 
+    `Golem`, 
+    `Ponyta`, 
+    `Rapidash`, 
+    `Slowpoke`, 
+    `Slowbro`, 
+    `Magnemite`, 
+    `Magneton`, 
+    `Farfetch'd`, 
+    `Doduo`, 
+    `Dodrio`, 
+    `Seel`, 
+    `Dewgong`, 
+    `Grimer`, 
+    `Muk`, 
+    `Shellder`, 
+    `Cloyster`, 
+    `Gastly`, 
+    `Haunter`, 
+    `Gengar`, 
+    `Onix`, 
+    `Drowzee`, 
+    `Hypno`, 
+    `Krabby`, 
+    `Kingler`, 
+    `Voltorb`, 
+    `Electrode`, 
+    `Exeggcute`, 
+    `Exeggutor`, 
+    `Cubone`, 
+    `Marowak`, 
+    `Hitmonlee`, 
+    `Hitmonchan`, 
+    `Lickitung`, 
+    `Koffing`, 
+    `Weezing`, 
+    `Rhyhorn`, 
+    `Rhydon`, 
+    `Chansey`, 
+    `Tangela`, 
+    `Kangaskhan`, 
+    `Horsea`, 
+    `Seadra`, 
+    `Goldeen`, 
+    `Seaking`, 
+    `Staryu`, 
+    `Starmie`, 
+    `Mr. Mime`, 
+    `Scyther`, 
+    `Jynx`, 
+    `Electabuzz`, 
+    `Magmar`, 
+    `Pinsir`, 
+    `Tauros`, 
+    `Magikarp`, 
+    `Gyarados`, 
+    `Lapras`, 
+    `Ditto`, 
+    `Eevee`, 
+    `Vaporeon`, 
+    `Jolteon`, 
+    `Flareon`, 
+    `Porygon`, 
+    `Omanyte`, 
+    `Omastar`, 
+    `Kabuto`, 
+    `Kabutops`, 
+    `Aerodactyl`, 
+    `Snorlax`, 
+    `Articuno`, 
+    `Zapdos`, 
+    `Moltres`, 
+    `Dratini`, 
+    `Dragonair`, 
+    `Dragonite`, 
+    `Mewtwo`, 
+    `Mew`, 
+    `Chikorita`, 
+    `Bayleef`, 
+    `Meganium`, 
+    `Cyndaquil`, 
+    `Quilava`, 
+    `Typhlosion`, 
+    `Totodile`, 
+    `Croconaw`, 
+    `Feraligatr`, 
+    `Sentret`, 
+    `Furret`, 
+    `Hoothoot`, 
+    `Noctowl`, 
+    `Ledyba`, 
+    `Ledian`, 
+    `Spinarak`, 
+    `Ariados`, 
+    `Crobat`, 
+    `Chinchou`, 
+    `Lanturn`, 
+    `Pichu`, 
+    `Cleffa`, 
+    `Igglybuff`, 
+    `Togepi`, 
+    `Togetic`, 
+    `Natu`, 
+    `Xatu`, 
+    `Mareep`, 
+    `Flaaffy`, 
+    `Ampharos`, 
+    `Bellossom`, 
+    `Marill`, 
+    `Azumarill`, 
+    `Sudowoodo`, 
+    `Politoed`, 
+    `Hoppip`, 
+    `Skiploom`, 
+    `Jumpluff`, 
+    `Aipom`, 
+    `Sunkern`, 
+    `Sunflora`, 
+    `Yanma`, 
+    `Wooper`, 
+    `Quagsire`, 
+    `Espeon`, 
+    `Umbreon`, 
+    `Murkrow`, 
+    `Slowking`, 
+    `Misdreavus`, 
+    `Unown`, 
+    `Wobbuffet`, 
+    `Girafarig`, 
+    `Pineco`, 
+    `Forretress`, 
+    `Dunsparce`, 
+    `Gligar`, 
+    `Steelix`, 
+    `Snubbull`, 
+    `Granbull`, 
+    `Qwilfish`, 
+    `Scizor`, 
+    `Shuckle`, 
+    `Heracross`, 
+    `Sneasel`, 
+    `Teddiursa`, 
+    `Ursaring`, 
+    `Slugma`, 
+    `Magcargo`, 
+    `Swinub`, 
+    `Piloswine`, 
+    `Corsola`, 
+    `Remoraid`, 
+    `Octillery`, 
+    `Delibird`, 
+    `Mantine`, 
+    `Skarmory`, 
+    `Houndour`, 
+    `Houndoom`, 
+    `Kingdra`, 
+    `Phanpy`, 
+    `Donphan`, 
+    `Porygon2`, 
+    `Stantler`, 
+    `Smeargle`, 
+    `Tyrogue`, 
+    `Hitmontop`, 
+    `Smoochum`, 
+    `Elekid`, 
+    `Magby`, 
+    `Miltank`, 
+    `Blissey`, 
+    `Raikou`, 
+    `Entei`, 
+    `Suicune`, 
+    `Larvitar`, 
+    `Pupitar`, 
+    `Tyranitar`, 
+    `Lugia`, 
+    `Ho-Oh`, 
+    `Celebi`, 
+    `Treecko`, 
+    `Grovyle`, 
+    `Sceptile`, 
+    `Torchic`, 
+    `Combusken`, 
+    `Blaziken`, 
+    `Mudkip`, 
+    `Marshtomp`, 
+    `Swampert`, 
+    `Poochyena`, 
+    `Mightyena`, 
+    `Zigzagoon`, 
+    `Linoone`, 
+    `Wurmple`, 
+    `Silcoon`, 
+    `Beautifly`, 
+    `Cascoon`, 
+    `Dustox`, 
+    `Lotad`, 
+    `Lombre`, 
+    `Ludicolo`, 
+    `Seedot`, 
+    `Nuzleaf`, 
+    `Shiftry`, 
+    `Taillow`, 
+    `Swellow`, 
+    `Wingull`, 
+    `Pelipper`, 
+    `Ralts`, 
+    `Kirlia`, 
+    `Gardevoir`, 
+    `Surskit`, 
+    `Masquerain`, 
+    `Shroomish`, 
+    `Breloom`, 
+    `Slakoth`, 
+    `Vigoroth`, 
+    `Slaking`, 
+    `Nincada`, 
+    `Ninjask`, 
+    `Shedinja`, 
+    `Whismur`, 
+    `Loudred`, 
+    `Exploud`, 
+    `Makuhita`, 
+    `Hariyama`, 
+    `Azurill`, 
+    `Nosepass`, 
+    `Skitty`, 
+    `Delcatty`, 
+    `Sableye`, 
+    `Mawile`, 
+    `Aron`, 
+    `Lairon`, 
+    `Aggron`, 
+    `Meditite`, 
+    `Medicham`, 
+    `Electrike`, 
+    `Manectric`, 
+    `Plusle`, 
+    `Minun`, 
+    `Volbeat`, 
+    `Illumise`, 
+    `Roselia`, 
+    `Gulpin`, 
+    `Swalot`, 
+    `Carvanha`, 
+    `Sharpedo`, 
+    `Wailmer`, 
+    `Wailord`, 
+    `Numel`, 
+    `Camerupt`, 
+    `Torkoal`, 
+    `Spoink`, 
+    `Grumpig`, 
+    `Spinda`, 
+    `Trapinch`, 
+    `Vibrava`, 
+    `Flygon`, 
+    `Cacnea`, 
+    `Cacturne`, 
+    `Swablu`, 
+    `Altaria`, 
+    `Zangoose`, 
+    `Seviper`, 
+    `Lunatone`, 
+    `Solrock`, 
+    `Barboach`, 
+    `Whiscash`, 
+    `Corphish`, 
+    `Crawdaunt`, 
+    `Baltoy`, 
+    `Claydol`, 
+    `Lileep`, 
+    `Cradily`, 
+    `Anorith`, 
+    `Armaldo`, 
+    `Feebas`, 
+    `Milotic`, 
+    `Castform`, 
+    `Kecleon`, 
+    `Shuppet`, 
+    `Banette`, 
+    `Duskull`, 
+    `Dusclops`, 
+    `Tropius`, 
+    `Chimecho`, 
+    `Absol`, 
+    `Wynaut`, 
+    `Snorunt`, 
+    `Glalie`, 
+    `Spheal`, 
+    `Sealeo`, 
+    `Walrein`, 
+    `Clamperl`, 
+    `Huntail`, 
+    `Gorebyss`, 
+    `Relicanth`, 
+    `Luvdisc`, 
+    `Bagon`, 
+    `Shelgon`, 
+    `Salamence`, 
+    `Beldum`, 
+    `Metang`, 
+    `Metagross`, 
+    `Regirock`, 
+    `Regice`, 
+    `Registeel`, 
+    `Latias`, 
+    `Latios`, 
+    `Kyogre`, 
+    `Groudon`, 
+    `Rayquaza`, 
+    `Jirachi`, 
+    `Deoxys`, 
+    `Turtwig`, 
+    `Grotle`, 
+    `Torterra`, 
+    `Chimchar`, 
+    `Monferno`, 
+    `Infernape`, 
+    `Piplup`, 
+    `Prinplup`, 
+    `Empoleon`, 
+    `Starly`, 
+    `Staravia`, 
+    `Staraptor`, 
+    `Bidoof`, 
+    `Bibarel`, 
+    `Kricketot`, 
+    `Kricketune`, 
+    `Shinx`, 
+    `Luxio`, 
+    `Luxray`, 
+    `Budew`, 
+    `Roserade`, 
+    `Cranidos`, 
+    `Rampardos`, 
+    `Shieldon`, 
+    `Bastiodon`, 
+    `Burmy`, 
+    `Wormadam`, 
+    `Mothim`, 
+    `Combee`, 
+    `Vespiquen`, 
+    `Pachirisu`, 
+    `Buizel`, 
+    `Floatzel`, 
+    `Cherubi`, 
+    `Cherrim`, 
+    `Shellos`, 
+    `Gastrodon`, 
+    `Ambipom`, 
+    `Drifloon`, 
+    `Drifblim`, 
+    `Buneary`, 
+    `Lopunny`, 
+    `Mismagius`, 
+    `Honchkrow`, 
+    `Glameow`, 
+    `Purugly`, 
+    `Chingling`, 
+    `Stunky`, 
+    `Skuntank`, 
+    `Bronzor`, 
+    `Bronzong`, 
+    `Bonsly`, 
+    `Mime Jr.`, 
+    `Happiny`, 
+    `Chatot`, 
+    `Spiritomb`, 
+    `Gible`, 
+    `Gabite`, 
+    `Garchomp`, 
+    `Munchlax`, 
+    `Riolu`, 
+    `Lucario`, 
+    `Hippopotas`, 
+    `Hippowdon`, 
+    `Skorupi`, 
+    `Drapion`, 
+    `Croagunk`, 
+    `Toxicroak`, 
+    `Carnivine`, 
+    `Finneon`, 
+    `Lumineon`, 
+    `Mantyke`, 
+    `Snover`, 
+    `Abomasnow`, 
+    `Weavile`, 
+    `Magnezone`, 
+    `Lickilicky`, 
+    `Rhyperior`, 
+    `Tangrowth`, 
+    `Electivire`, 
+    `Magmortar`, 
+    `Togekiss`, 
+    `Yanmega`, 
+    `Leafeon`, 
+    `Glaceon`, 
+    `Gliscor`, 
+    `Mamoswine`, 
+    `Porygon-Z`, 
+    `Gallade`, 
+    `Probopass`, 
+    `Dusknoir`, 
+    `Froslass`, 
+    `Rotom`, 
+    `Uxie`, 
+    `Mesprit`, 
+    `Azelf`, 
+    `Dialga`, 
+    `Palkia`, 
+    `Heatran`, 
+    `Regigigas`, 
+    `Giratina`, 
+    `Cresselia`, 
+    `Phione`, 
+    `Manaphy`, 
+    `Darkrai`, 
+    `Shaymin`, 
+    `Arceus`, 
+    `Victini`, 
+    `Snivy`, 
+    `Servine`, 
+    `Serperior`, 
+    `Tepig`, 
+    `Pignite`, 
+    `Emboar`, 
+    `Oshawott`, 
+    `Dewott`, 
+    `Samurott`, 
+    `Patrat`, 
+    `Watchog`, 
+    `Lillipup`, 
+    `Herdier`, 
+    `Stoutland`, 
+    `Purrloin`, 
+    `Liepard`, 
+    `Pansage`, 
+    `Simisage`, 
+    `Pansear`, 
+    `Simisear`, 
+    `Panpour`, 
+    `Simipour`, 
+    `Munna`, 
+    `Musharna`, 
+    `Pidove`, 
+    `Tranquill`, 
+    `Unfezant`, 
+    `Blitzle`, 
+    `Zebstrika`, 
+    `Roggenrola`, 
+    `Boldore`, 
+    `Gigalith`, 
+    `Woobat`, 
+    `Swoobat`, 
+    `Drilbur`, 
+    `Excadrill`, 
+    `Audino`, 
+    `Timburr`, 
+    `Gurdurr`, 
+    `Conkeldurr`, 
+    `Tympole`, 
+    `Palpitoad`, 
+    `Seismitoad`, 
+    `Throh`, 
+    `Sawk`, 
+    `Sewaddle`, 
+    `Swadloon`, 
+    `Leavanny`, 
+    `Venipede`, 
+    `Whirlipede`, 
+    `Scolipede`, 
+    `Cottonee`, 
+    `Whimsicott`, 
+    `Petilil`, 
+    `Lilligant`, 
+    `Basculin`, 
+    `Sandile`, 
+    `Krokorok`, 
+    `Krookodile`, 
+    `Darumaka`, 
+    `Darmanitan`, 
+    `Maractus`, 
+    `Dwebble`, 
+    `Crustle`, 
+    `Scraggy`, 
+    `Scrafty`, 
+    `Sigilyph`, 
+    `Yamask`, 
+    `Cofagrigus`, 
+    `Tirtouga`, 
+    `Carracosta`, 
+    `Archen`, 
+    `Archeops`, 
+    `Trubbish`, 
+    `Garbodor`, 
+    `Zorua`, 
+    `Zoroark`, 
+    `Minccino`, 
+    `Cinccino`, 
+    `Gothita`, 
+    `Gothorita`, 
+    `Gothitelle`, 
+    `Solosis`, 
+    `Duosion`, 
+    `Reuniclus`, 
+    `Ducklett`, 
+    `Swanna`, 
+    `Vanillite`, 
+    `Vanillish`, 
+    `Vanilluxe`, 
+    `Deerling`, 
+    `Sawsbuck`, 
+    `Emolga`, 
+    `Karrablast`, 
+    `Escavalier`, 
+    `Foongus`, 
+    `Amoonguss`, 
+    `Frillish`, 
+    `Jellicent`, 
+    `Alomomola`, 
+    `Joltik`, 
+    `Galvantula`, 
+    `Ferroseed`, 
+    `Ferrothorn`, 
+    `Klink`, 
+    `Klang`, 
+    `Klinklang`, 
+    `Tynamo`, 
+    `Eelektrik`, 
+    `Eelektross`, 
+    `Elgyem`, 
+    `Beheeyem`, 
+    `Litwick`, 
+    `Lampent`, 
+    `Chandelure`, 
+    `Axew`, 
+    `Fraxure`, 
+    `Haxorus`, 
+    `Cubchoo`, 
+    `Beartic`, 
+    `Cryogonal`, 
+    `Shelmet`, 
+    `Accelgor`, 
+    `Stunfisk`, 
+    `Mienfoo`, 
+    `Mienshao`, 
+    `Druddigon`, 
+    `Golett`, 
+    `Golurk`, 
+    `Pawniard`, 
+    `Bisharp`, 
+    `Bouffalant`, 
+    `Rufflet`, 
+    `Braviary`, 
+    `Vullaby`, 
+    `Mandibuzz`, 
+    `Heatmor`, 
+    `Durant`, 
+    `Deino`, 
+    `Zweilous`, 
+    `Hydreigon`, 
+    `Larvesta`, 
+    `Volcarona`, 
+    `Cobalion`, 
+    `Terrakion`, 
+    `Virizion`, 
+    `Tornadus`, 
+    `Thundurus`, 
+    `Reshiram`, 
+    `Zekrom`, 
+    `Landorus`, 
+    `Kyurem`, 
+    `Keldeo`, 
+    `Meloetta`, 
+    `Genesect`, 
+    `Chespin`, 
+    `Quilladin`, 
+    `Chesnaught`, 
+    `Fennekin`, 
+    `Braixen`, 
+    `Delphox`, 
+    `Froakie`, 
+    `Frogadier`, 
+    `Greninja`, 
+    `Bunnelby`, 
+    `Diggersby`, 
+    `Fletchling`, 
+    `Fletchinder`, 
+    `Talonflame`, 
+    `Scatterbug`, 
+    `Spewpa`, 
+    `Vivillon`, 
+    `Litleo`, 
+    `Pyroar`, 
+    `Flabébé`, 
+    `Floette`, 
+    `Florges`, 
+    `Skiddo`, 
+    `Gogoat`, 
+    `Pancham`, 
+    `Pangoro`, 
+    `Furfrou`, 
+    `Espurr`, 
+    `Meowstic`, 
+    `Honedge`, 
+    `Doublade`, 
+    `Aegislash`, 
+    `Spritzee`, 
+    `Aromatisse`, 
+    `Swirlix`, 
+    `Slurpuff`, 
+    `Inkay`, 
+    `Malamar`, 
+    `Binacle`, 
+    `Barbaracle`, 
+    `Skrelp`, 
+    `Dragalge`, 
+    `Clauncher`, 
+    `Clawitzer`, 
+    `Helioptile`, 
+    `Heliolisk`, 
+    `Tyrunt`, 
+    `Tyrantrum`, 
+    `Amaura`, 
+    `Aurorus`, 
+    `Sylveon`, 
+    `Hawlucha`, 
+    `Dedenne`, 
+    `Carbink`, 
+    `Goomy`, 
+    `Sliggoo`, 
+    `Goodra`, 
+    `Klefki`, 
+    `Phantump`, 
+    `Trevenant`, 
+    `Pumpkaboo`, 
+    `Gourgeist`, 
+    `Bergmite`, 
+    `Avalugg`, 
+    `Noibat`, 
+    `Noivern`, 
+    `Xerneas`, 
+    `Yveltal`, 
+    `Zygarde`, 
+    `Diancie`, 
+    `Hoopa`, 
+    `Volcanion`, 
+    `Rowlet`, 
+    `Dartrix`, 
+    `Decidueye`, 
+    `Litten`, 
+    `Torracat`, 
+    `Incineroar`, 
+    `Popplio`, 
+    `Brionne`, 
+    `Primarina`, 
+    `Pikipek`, 
+    `Trumbeak`, 
+    `Toucannon`, 
+    `Yungoos`, 
+    `Gumshoos`, 
+    `Grubbin`, 
+    `Charjabug`, 
+    `Vikavolt`, 
+    `Crabrawler`, 
+    `Crabominable`, 
+    `Oricorio`, 
+    `Cutiefly`, 
+    `Ribombee`, 
+    `Rockruff`, 
+    `Lycanroc`, 
+    `Wishiwashi`, 
+    `Mareanie`, 
+    `Toxapex`, 
+    `Mudbray`, 
+    `Mudsdale`, 
+    `Dewpider`, 
+    `Araquanid`, 
+    `Fomantis`, 
+    `Lurantis`, 
+    `Morelull`, 
+    `Shiinotic`, 
+    `Salandit`, 
+    `Salazzle`, 
+    `Stufful`, 
+    `Bewear`, 
+    `Bounsweet`, 
+    `Steenee`, 
+    `Tsareena`, 
+    `Comfey`, 
+    `Oranguru`, 
+    `Passimian`, 
+    `Wimpod`, 
+    `Golisopod`, 
+    `Sandygast`, 
+    `Palossand`, 
+    `Pyukumuku`, 
+    `Type: Null`, 
+    `Silvally`, 
+    `Minior`, 
+    `Komala`, 
+    `Turtonator`, 
+    `Togedemaru`, 
+    `Mimikyu`, 
+    `Bruxish`, 
+    `Drampa`, 
+    `Dhelmise`, 
+    `Jangmo-o`, 
+    `Hakamo-o`, 
+    `Kommo-o`, 
+    `Tapu Koko`, 
+    `Tapu Lele`, 
+    `Tapu Bulu`, 
+    `Tapu Fini`, 
+    `Cosmog`, 
+    `Cosmoem`, 
+    `Solgaleo`, 
+    `Lunala`, 
+    `Nihilego`, 
+    `Buzzwole`, 
+    `Pheromosa`, 
+    `Xurkitree`, 
+    `Celesteela`, 
+    `Kartana`, 
+    `Guzzlord`, 
+    `Necrozma`, 
+    `Magearna`, 
+    `Marshadow`, 
+    `Poipole`, 
+    `Naganadel`, 
+    `Stakataka`, 
+    `Blacephalon`, 
+    `Zeraora`, 
+    `Meltan`, 
+    `Melmetal`
+];
+
+const [update1, setUpdater1] = useState(1);
+const [update2, setUpdater2] = useState(2);
+
+const idno = [ 0, 1 ];
+const name = [ pokename[0], pokename[1] ];
+const pict = [ `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/0.png`
+, `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/1.png` ];
+
+idno[0] = parseInt(update1);
+name[0] = pokename[idno[0]];
+pict[0] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${idno[0] + 1}.png`;
+
+idno[1] = parseInt(update2);
+name[1] = pokename[idno[1]];
+pict[1] = `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${idno[1] + 1}.png`;
+
+  let idLeft = idno[0];
+  let idRight = idno[1];
+
+  const [showResults, setShowResults] = useState(false);
+  const [calcResults, setCalcResults] = useState(false);
+  let [showWinner, setShowWinner] = useState("");
+
+  const leftName = pokemons[idLeft].name["english"];
+  const leftId = pokemons["id"];
+  const leftType1 = pokemons[idLeft].type[0];
+  const leftType2 = pokemons[idLeft].type[1];
+  const leftHP = pokemons[idLeft].base["HP"];
+  const leftAttack = pokemons[idLeft].base["Attack"];
+  const leftDefense = pokemons[idLeft].base["Defense"];
+  const leftSpAttack = pokemons[idLeft].base["Sp. Attack"];
+  const leftSpDefense = pokemons[idLeft].base["Sp. Defense"];
+  const leftSpeed = pokemons[idLeft].base["Speed"];
+
+  const rightName = pokemons[idRight].name["english"];
+  const rightId = pokemons["id"];
+  const rightType1 = pokemons[idRight].type[0];
+  const rightType2 = pokemons[idRight].type[1];
+  const rightHP = pokemons[idRight].base["HP"];
+  const rightAttack = pokemons[idRight].base["Attack"];
+  const rightDefense = pokemons[idRight].base["Defense"];
+  const rightSpAttack = pokemons[idRight].base["Sp. Attack"];
+  const rightSpDefense = pokemons[idRight].base["Sp. Defense"];
+  const rightSpeed = pokemons[idRight].base["Speed"];
+
+  // starte Fight
+  function handleClick(e) {
+    e.preventDefault();
+    setShowResults((prev) => !prev);
+    setCalcResults((prev) => !prev);
+    //console.log("klicked");
+    if (!calcResults) {
+      getResult();
+    }
+  }
+
+  function getResult() {
+    let pointsPokemonLeft = 0;
+    let pointsPokemonRight = 0;
+    if (leftHP > rightHP) {
+      pointsPokemonLeft += 1;
+    } else if (leftHP < rightHP) {
+      pointsPokemonRight += 1;
+    }
+    if (leftAttack > rightAttack) {
+      pointsPokemonLeft += 1;
+    } else if (leftAttack < rightAttack) {
+      pointsPokemonRight += 1;
+    }
+    if (leftDefense > rightDefense) {
+      pointsPokemonLeft += 1;
+    } else if (leftDefense < rightDefense) {
+      pointsPokemonRight += 1;
+    }
+    if (leftSpAttack > rightSpAttack) {
+      pointsPokemonLeft += 1;
+    } else if (leftSpAttack < rightSpAttack) {
+      pointsPokemonRight += 1;
+    }
+    if (leftSpDefense > rightSpDefense) {
+      pointsPokemonLeft += 1;
+    } else if (leftSpDefense < rightSpDefense) {
+      pointsPokemonRight += 1;
+    }
+    if (leftSpeed > rightSpeed) {
+      pointsPokemonLeft += 1;
+    } else if (leftSpeed < rightSpeed) {
+      pointsPokemonRight += 1;
+    }
+
+    let url = "http://localhost:3000/game/save/";
+
+    let lid = parseInt(update1) + 1;
+    let rid = parseInt(update2) + 1;
+
+    if (pointsPokemonLeft > pointsPokemonRight) {
+      url += lid + "/" + leftName + "/" + rid + "/" + rightName;
+      console.log(`Pokemon on the left wins`);
+      setShowWinner("left");
+    } else if (pointsPokemonLeft < pointsPokemonRight) {
+      url += rid + "/" + rightName + "/" + lid + "/" + leftName;
+      setShowWinner("right");
+    } else {
+      setShowWinner("");
+    }
+
+    Fetcher( url, function(par) {});
+
+  }
+
+  return (
+    <div>
+      <h2>PokeFight</h2>
+      <div className = "playBox">
+        <div onClick={() => setUpdater1(update1 + 1)}>
+          <Player id={idno[0]} name={name[0]} url={pict[0]} />
+        </div>
+        <div className="middle">
+          <button className = "fightButton" onClick={handleClick}>VS.</button>
+          {showResults && (
+            <>
+              <div>
+                  {showWinner === "left"
+                    ? "Left Wins"
+                    : showWinner === "right"
+                    ? "Right Wins"
+                    : "Both Looser!"}
+              </div>
+            </>
+          )}
+        </div>
+        <div onClick={() => setUpdater2(update2 + 1)}>
+          <Player id={idno[1]} name={name[1]} url={pict[1]} />
+        </div>
+      </div>
+      <div className="wrapper">
+        <div className="leftCard">
+          <div>
+            {isLoading && <p>Loading ...</p>}
+            {pokemons.length > 0 && (
+              <ul className="pokemonDetailsLeft">
+                <li>
+                  Pokedex Nr. {leftId} {idLeft + 1}
+                </li>
+                <li>Name: {leftName} </li>
+                <li>...</li>
+
+                <li>
+                  Type: {leftType1} {leftType2 ? `, ${leftType2}` : ``}
+                </li>
+                <li>HP: {leftHP} </li>
+                <li>Attack: {leftAttack}</li>
+                <li>Defense: {leftDefense}</li>
+                <li>Sp. Attack: {leftSpAttack}</li>
+                <li>Sp. Defense: {leftSpDefense}</li>
+                <li>Speed: {leftSpeed}</li>
+              </ul>
+            )}
+          </div>
+        </div>
+        <div className="rightCard">
+          <div>
+            {isLoading && <p>Loading ...</p>}
+            {pokemons.length > 0 && (
+              <ul className="pokemonDetailsRight">
+                <li>
+                  Pokedex Nr. {rightId} {idRight + 1}
+                </li>
+                <li>Name: {rightName} </li>
+                <li>...</li>
+
+                <li>
+                  Type: {rightType1} {rightType2 ? `, ${rightType2}` : ``}
+                </li>
+                <li>HP: {rightHP} </li>
+                <li>Attack: {rightAttack}</li>
+                <li>Defense: {rightDefense}</li>
+                <li>Sp. Attack: {rightSpAttack}</li>
+                <li>Sp. Defense: {rightSpDefense}</li>
+                <li>Speed: {rightSpeed}</li>
+              </ul>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
+export default Test;

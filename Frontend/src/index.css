@@ -1,0 +1,63 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  background-color: rgba(40, 40, 40, 0.5);
+}
+
+.playBox
+{
+  display: flex;
+  justify-content: space-between;
+}
+
+.playerButton, .fightButton
+{
+  border: none;
+  cursor: pointer;
+  border-radius: 20px;
+  background-color: rgb(230,230,230);
+  border: 4px solid rgb(240,240,240);
+  box-shadow: 4px 4px 4px rgba(70,70,70,0.12);
+}
+
+.playerButton:hover
+{
+  background-color: rgb(216,217,218);
+  box-shadow: 4px 4px 4px rgba(20,20,20,0.15);
+}
+
+.fightButton
+{
+  width: 120px;
+  height: 200px;
+  font-size: 200%;
+  margin: 0 1%;
+  background-color: rgb(120, 30, 50);
+  color: #FFF;
+  margin-bottom: 50px;
+}
+
+.fightButton:hover
+{
+  background-color: rgb(90, 30, 50);
+  box-shadow: 4px 4px 4px rgba(20,20,20,0.15);
+}
+
+.middle
+{
+  width: 200px;
+  display: inner-flex;
+  align-items: flex-start;
+}
+
+iframe
+{
+  border: none;
+  width: 80%;
+  height: 100vh;
+}
